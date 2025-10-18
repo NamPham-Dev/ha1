@@ -96,7 +96,7 @@ class CalculatorTest {
      */
 
     @Test
-    @DisplayName("should display result after subtracting a positive number from a differen positive number")
+    @DisplayName("should display result after subtracting a positive number from a different positive number")
     void testSubtraction() {
         Calculator calc = new Calculator();
 
@@ -106,6 +106,28 @@ class CalculatorTest {
         calc.pressDigitKey(5);
 
         String expected = "5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Dieser Test soll die Löschfunktion der Clear-Taste fürs einmalige Drücken testen.
+     */
+
+    @Test
+    @DisplayName("should only clear the latest input")
+    void testClearButton() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressDigitKey(4);
+
+        String expected = "6";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
